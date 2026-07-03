@@ -3,6 +3,7 @@
 ![VitaLog Banner](https://img.shields.io/badge/VitaLog-LifeSim-8b5cf6?style=for-the-badge&logo=react&logoColor=white)
 ![Tech Stack](https://img.shields.io/badge/React_19-TypeScript-38bdf8?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_v4-06b6d4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Ready-emerald?style=for-the-badge&logo=github&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-emerald?style=for-the-badge)
 
 **VitaLog** ist eine moderne, hochgradig interaktive Lebenssimulation im Browser, inspiriert von Spielen wie *BitLife*, jedoch mit einem eigenständigen Dark-Mode-Design, einer tiefen Wirtschaftssimulation, prozeduralen Ereignissen und Mehrgenerationen-Dynastien. Begleite deinen Charakter von der Geburt bis zur Rente – und führe dein Erbe als nächste Generation weiter!
@@ -19,7 +20,7 @@
 ### ⏳ 2. Das Leben ("Ein Jahr älter werden"-Engine)
 - Jeder Klick auf den großen **Ein Jahr älter werden**-Button treibt die Simulation voran.
 - **Lebenschronik (Logbuch):** Alle Ereignisse des Jahres werden übersichtlich mit Zeitstempel protokolliert und können nach Meilensteinen, Erfolgen und Rückschlägen gefiltert werden.
-- **Prozedurales & Statisches Event-System:** Über **300+ Ereignis-Variationen** aus 11 Kategorien (*Schule, Familie, Liebe, Gesundheit, Karriere, Finanzen, Freizeit, Glück, Unglück, Kriminalität, Haustiere*). Jedes Ereignis bietet mehrere Auswahlmöglichkeiten mit echten Konsequenzen für Werte und Kontostand!
+- **Prozedurales & Statisches Event-System:** Über **300+ Ereignis-Variationen** aus 11 Kategorien (*Schule, Familie, Liebe, Gesundheit, Karriere, Finanzen, Freizeit, Glück, Unglück, Kriminalität, Haustiere*). Jedes Ereignis bietet interaktive Auswahlmöglichkeiten mit echten Konsequenzen für Werte und Kontostand!
 
 ### 🎓 3. Bildungssystem & Karrieredynamik
 - **Bildungsweg:** Kindergarten ➔ Grundschule ➔ Mittelschule / Gymnasium ➔ Berufsausbildung / Universitätsstudium (10 Fachrichtungen wie Informatik, Medizin, Jura, BWL) ➔ Promotion (Doktortitel).
@@ -47,7 +48,7 @@
 - **Familie & Freunde:** Interagiere mit Eltern, Geschwistern, Partnern und Kindern (Unterhalten, Geschenke machen, Streiten, um Geld bitten).
 - **Romantik & Nachwuchs:** Partnersuche über Dating-App, Heiratsantrag, Traumhochzeiten feiern und eigene Kinder bekommen.
 - **Tierheim:** Adoptiere 7 verschiedene Tierarten (Golden Retriever, Perserkatze, Papagei, Pferd oder sogar einen exotischen Bengaltiger!).
-- **👑 Generationen-Erbe (Dynastie):** Wenn dein Charakter stirbt, kannst du als dein Kind (nächste Generation) weiterspielen und 75% des Familienvermögens erben!
+- **👑 Generationen-Erbe (Dynastie):** Wenn dein Charakter stirbt, kannst du als dein Kind (nächste Generation) weiterspielen und **75% des Familienvermögens erben**!
 
 ### 🦹 7. Kriminalität & Gefängnissystem
 - **Illegale Coups:** Ladendiebstahl, Taschendiebstahl, Steuerhinterziehung und Banken-Hacking.
@@ -69,69 +70,67 @@
 
 ---
 
-## 🛠️ Technischer Stack
+## 🚀 Production-Ready für GitHub Pages (CI/CD Guide)
 
-- **Frontend:** React 19 + TypeScript
-- **Build-Tool:** Vite (Extrem schnelle Builds & HMR)
-- **Styling:** Tailwind CSS v4 (Glassmorphic Dark Mode Design)
-- **Icons:** Lucide React
-- **Effekte:** Canvas-Confetti & Web Audio API
-- **Speicherung:** 100% Clientseitig über `localStorage` (keine Datenbank oder Backend nötig!)
+Dieses Projekt ist von Grund auf als **Production-Ready Web-Applikation** für GitHub konzipiert. Es verwendet relative Pfade (`base: './'`), generiert automatische Fallback-Seiten für GitHub Pages (`404.html` und `.nojekyll`) und enthält professionelle GitHub Actions Workflows.
+
+### 🛠️ Automatische Optimierungen im Build-Prozess
+Bei jedem Aufruf von `npm run build` werden folgende Schritte ausgeführt:
+1. **TypeScript Check & Bundle:** Vite bündelt und minifiziert den React- und Tailwind-Code mit extrem kleinen Dateigrößen (Gzip < 150 KB total).
+2. **`404.html` Generierung:** Durch das `postbuild`-Skript wird `index.html` als `404.html` dupliziert. Sollte ein Nutzer auf GitHub Pages die Seite aktualisieren, verhindert dies 404-Fehler.
+3. **`.nojekyll` Flag:** Erstellt automatisch die `.nojekyll`-Datei, damit GitHub Pages keine Vite-Dateien (z.B. mit Unterstrich) ignoriert.
 
 ---
 
-## 🚀 Lokale Installation & Start
+### 🌐 Methode A: Automatisches CI/CD Deployment per GitHub Actions (Empfohlen)
 
-1. **Repository klonen oder herunterladen:**
+Das Repository enthält eine vorgefertigte **Zero-Config Deployment-Pipeline** unter `.github/workflows/deploy.yml` sowie eine CI-Test-Pipeline unter `.github/workflows/ci.yml`.
+
+**So aktivierst du GitHub Pages in deinem Repository:**
+1. Pushe das Projekt auf deinen GitHub-Account (Branch `main` oder `master`).
+2. Klicke in deinem GitHub-Repository oben auf den Tab **"Settings"** ➔ **"Pages"** (in der linken Seitenleiste).
+3. Wähle unter **Build and deployment ➔ Source** im Dropdown-Menü die Option **"GitHub Actions"** aus.
+4. **Fertig!** Sobald du Änderungen auf deinen Hauptbranch pushst, startet GitHub Actions den Workflow, baut die App und veröffentlicht sie automatisch live unter deiner GitHub-Pages-URL (`https://<dein-username>.github.io/<repo-name>/`).
+
+---
+
+### 💻 Methode B: Manuelles Deployment (gh-pages CLI)
+
+Du kannst das Projekt auch direkt von deinem lokalen Terminal aus deployen. Das Paket `gh-pages` ist bereits als Entwickler-Abhängigkeit integriert.
+
+1. Stelle sicher, dass in `package.json` unter `"homepage"` deine richtige GitHub-URL eingetragen ist (optional).
+2. Führe im Terminal einfach diesen Befehl aus:
    ```bash
-   git clone https://github.com/DEIN-USER/vitalog-lifesim.git
+   npm run deploy
+   ```
+3. Das Skript baut die Produktion optimal zusammen und pusht den fertigen `dist/`-Ordner automatisch auf den `gh-pages` Branch deines Repositories!
+
+---
+
+## 📦 Lokale Installation & Entwicklung
+
+1. **Repository klonen:**
+   ```bash
+   git clone https://github.com/user/vitalog-lifesim.git
    cd vitalog-lifesim
    ```
 
 2. **Abhängigkeiten installieren:**
    ```bash
-   npm install
+   npm ci
    ```
 
-3. **Entwicklungsserver starten:**
+3. **Entwicklungs-Server starten:**
    ```bash
    npm run dev
    ```
-   Öffne den im Terminal angezeigten Link (Standard: `http://localhost:5173`) in deinem Webbrowser.
+   Öffne den Link im Terminal (meist `http://localhost:5173`) in deinem Webbrowser.
 
-4. **Für Produktion bauen:**
+4. **Produktions-Build testen:**
    ```bash
    npm run build
+   npm run preview
    ```
-   Die fertigen, optimierten Dateien befinden sich anschließend im `dist/`-Ordner.
-
----
-
-## 🌐 GitHub Pages Deployment
-
-Das Projekt ist ab Werk vollständig für **GitHub Pages** konfiguriert (`base: './'` in `vite.config.ts`). Es gibt zwei Wege für das Deployment:
-
-### Methode A: Automatisches Deployment per GitHub Actions (Empfohlen)
-
-Das Repository enthält eine vorgefertigte Workflow-Datei unter `.github/workflows/deploy.yml`.
-
-1. Lade deinen Code auf GitHub hoch (Pushen auf den Branch `main` oder `master`).
-2. Gehe in deinem GitHub-Repository zu **Settings ➔ Pages**.
-3. Wähle unter **Source** die Option **"GitHub Actions"** aus.
-4. Sobald du Änderungen auf `main` pushst, baut GitHub die Seite automatisch und veröffentlicht sie live!
-
-### Methode B: Manuelles Deployment (gh-pages)
-
-Falls du das klassische `gh-pages` Paket verwenden möchtest:
-1. Installiere `gh-pages` als Dev-Dependency:
-   ```bash
-   npm install -D gh-pages
-   ```
-2. Füge in deiner `package.json` unter `"scripts"` hinzu:
-   ```json
-   "deploy": "npm run build && gh-pages -d dist"
-   ```
-3. Führe `npm run deploy` aus.
 
 ---
 
@@ -144,47 +143,8 @@ Du kannst deinen Fortschritt jederzeit sichern und auf andere Geräte übertrage
 
 ---
 
-## 📁 Ordnerstruktur
-
-```text
-vitalog/
-├── .github/workflows/
-│   └── deploy.yml            # GitHub Actions CI/CD Pipeline
-├── src/
-│   ├── components/
-│   │   ├── common/           # Header, StatBar, Modal, Confetti
-│   │   ├── creation/         # Charaktererstellungs-Bildschirm
-│   │   └── tabs/             # Die 10 Haupt-Spielbereiche (Leben, Finanzen, Karriere, etc.)
-│   ├── data/
-│   │   ├── achievements.ts   # Die 50+ Meilensteine
-│   │   ├── countries.ts      # 10 Länderdaten mit Steuersätzen
-│   │   ├── education.ts      # Schul- und Studienabschlüsse
-│   │   ├── events.ts         # 300+ statische und prozedurale Events
-│   │   ├── jobs.ts           # 35+ Berufe mit Karriereleitern
-│   │   ├── minigames.ts      # Quizfragen & Tresor-Ziele
-│   │   ├── names.ts          # Namensgenerator für alle Länder
-│   │   ├── pets.ts           # Tierarten im Tierheim
-│   │   ├── properties.ts     # Immobilienkatalog
-│   │   └── vehicles.ts       # Fahrzeugkatalog
-│   ├── types/
-│   │   └── game.ts           # Vollständige TypeScript Interfaces
-│   ├── utils/
-│   │   ├── engine.ts         # Die Kernlogik fürs Altern ("Ein Jahr älter werden")
-│   │   ├── sound.ts          # Web Audio API Sound Synthesizer
-│   │   └── storage.ts        # LocalStorage & JSON Import/Export
-│   ├── App.tsx               # Hauptkomponente & Tab-Steuerung
-│   ├── index.css             # Tailwind CSS & Custom Styles
-│   └── main.tsx              # React Einstiegspunkt
-├── index.html                # HTML Template
-├── package.json
-├── tsconfig.json
-└── vite.config.ts            # Vite Konfiguration (GitHub Pages ready)
-```
-
----
-
 ## 🤝 Lizenz & Credits
 
-Dieses Projekt wurde als moderne, freie Browser-Lebenssimulation im Rahmen von Arena.ai entwickelt.
+Dieses Projekt wurde als freie Browser-Lebenssimulation mit **React 19, TypeScript und Tailwind CSS v4** konzipiert.
 - **Inspiration:** BitLife, The Sims
-- **Lizenz:** MIT-Lizenz – frei modifizierbar, erweiterbar und für den privaten/edukativen Einsatz nutzbar!
+- **Lizenz:** MIT-Lizenz – frei modifizierbar, erweiterbar und für den privaten, geschäftlichen oder edukativen Einsatz nutzbar!

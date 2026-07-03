@@ -1,13 +1,35 @@
 {
-  "name": "temp-app",
-  "private": true,
-  "version": "0.0.0",
+  "name": "vitalog-lifesim",
+  "private": false,
+  "version": "1.0.0",
+  "description": "VitaLog - Die moderne Browser-Lebenssimulation (BitLife-inspiriert) mit React, TypeScript & Tailwind CSS. 100% GitHub Pages kompatibel ohne Server-Abhängigkeiten.",
   "type": "module",
+  "homepage": "https://github.com/user/vitalog-lifesim#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/user/vitalog-lifesim.git"
+  },
+  "keywords": [
+    "bitlife",
+    "lifesim",
+    "simulation",
+    "react",
+    "typescript",
+    "tailwind",
+    "game",
+    "browser-game",
+    "github-pages"
+  ],
+  "author": "Arena Agent <agent@arena.ai>",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "postbuild": "cp dist/index.html dist/404.html && touch dist/.nojekyll",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist -t true"
   },
   "dependencies": {
     "@types/canvas-confetti": "^1.9.0",
@@ -26,6 +48,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "autoprefixer": "^10.5.2",
+    "gh-pages": "^6.3.0",
     "oxlint": "^1.71.0",
     "postcss": "^8.5.16",
     "tailwindcss": "^4.3.2",
